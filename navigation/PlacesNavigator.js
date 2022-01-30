@@ -25,7 +25,7 @@ const MainNavigator = () => {
         component={PlacesListScreen}
         options={{ title: 'Всички места' }}
       />
-      <Stack.Screen name="Details" component={PlaceDetailScreen} />
+      <Stack.Screen name="PlaceDetail" component={PlaceDetailScreen} />
       <Stack.Screen
         name="NewPlace"
         component={NewPlaceScreen}
