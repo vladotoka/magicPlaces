@@ -23,10 +23,14 @@ const MainNavigator = () => {
       <Stack.Screen
         name="List"
         component={PlacesListScreen}
-        options={{ title: 'Списък' }}
+        options={{ title: 'Всички места' }}
       />
       <Stack.Screen name="Details" component={PlaceDetailScreen} />
-      <Stack.Screen name="New" component={NewPlaceScreen} />
+      <Stack.Screen
+        name="NewPlace"
+        component={NewPlaceScreen}
+        options={{ title: 'Ново място' }}
+      />
       <Stack.Screen name="Map" component={MapScreen} />
     </Stack.Navigator>
   );

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 import React, { useLayoutEffect } from 'react';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 
@@ -12,7 +12,7 @@ useLayoutEffect(() => {
   props.navigation.setOptions({
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
+        <Item title='Add Place' iconName={Platform.OS === 'android' ? 'md-add' : 'ios-add'} onPress={() => props.navigation.navigate('NewPlace')} />
       </HeaderButtons>
     )
   })
