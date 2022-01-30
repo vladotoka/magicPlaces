@@ -7,17 +7,27 @@ import {
   View,
 } from 'react-native';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { CommonActions } from '@react-navigation/native';
 
 import Colors from '../constants/Colors';
+import * as placesActions from '../store/places-actions';
 
 const NewPlaceScren = (props) => {
   const [titleValue, setTitlevalue] = useState('');
+
+  const dispatch = useDispatch();
+
   const titleChangeHandler = (text) => {
     //TODO add some text validation
     setTitlevalue(text);
   };
 
-  const savePlaceHandler = () => {}
+  const savePlaceHandler = () => {
+    dispatch(placesActions.addPlace(titleValue));
+    console.log('saved');
+    props.navigation.dispatch(CommonActions.goBack());
+  };
   return (
     <ScrollView>
       <View style={styles.form}>
@@ -28,7 +38,11 @@ const NewPlaceScren = (props) => {
           value={titleValue}
           onChangeText={titleChangeHandler}
         />
-        <Button title="запази" color={Colors.primary} onPress={savePlaceHandler} />
+        <Button
+          title="запази"
+          color={Colors.primary}
+          onPress={savePlaceHandler}
+        />
       </View>
     </ScrollView>
   );
