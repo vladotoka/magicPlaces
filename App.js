@@ -7,6 +7,15 @@ import placesReducer from './store/places-reducer';
 
 import { NavigationContainer } from '@react-navigation/native';
 import MainNavigator from './navigation/PlacesNavigator';
+import { init } from './helpers/db';
+
+init()
+  .then(() => {
+    console.log('Initialized database');
+  })
+  .catch((err) => {
+    console.log(`Initialized DB failed with error: ${err}`);
+  });
 
 const rootReducer = combineReducers({
   places: placesReducer,
