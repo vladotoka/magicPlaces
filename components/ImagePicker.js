@@ -4,7 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 import Colors from '../constants/Colors';
 
-const ImgPicker = () => {
+const ImgPicker = (props) => {
   const [pickedImage, setPickedImage] = useState();
 
   const takeImageHandler = async () => {
@@ -17,6 +17,7 @@ const ImgPicker = () => {
     });
 
     setPickedImage(image.uri);
+    props.onImageTaken(image.uri);
   };
 
   return (

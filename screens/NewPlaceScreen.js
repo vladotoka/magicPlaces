@@ -16,6 +16,7 @@ import ImagePicker from '../components/ImagePicker';
 
 const NewPlaceScren = (props) => {
   const [titleValue, setTitlevalue] = useState('');
+  const [selectedImage, setSelectedImage] = useState();
 
   const dispatch = useDispatch();
 
@@ -25,10 +26,15 @@ const NewPlaceScren = (props) => {
   };
 
   const savePlaceHandler = () => {
-    dispatch(placesActions.addPlace(titleValue));
+    dispatch(placesActions.addPlace(titleValue, selectedImage));
     console.log('saved');
     props.navigation.dispatch(CommonActions.goBack());
   };
+
+  const imageTakenHandler = (imagePath) => {
+    setSelectedImage(imagePath);
+  };
+
   return (
     <ScrollView>
       <View style={styles.form}>
@@ -39,7 +45,7 @@ const NewPlaceScren = (props) => {
           value={titleValue}
           onChangeText={titleChangeHandler}
         />
-        <ImagePicker/>
+        <ImagePicker onImageTaken={imageTakenHandler} />
         <Button
           title="запази"
           color={Colors.primary}
