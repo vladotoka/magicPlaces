@@ -18,7 +18,7 @@ export const addPlace = (title, image) => {
 
       dispatch({
         type: ADD_PLACE,
-        placeData: { id:dbResult.insertId, title: title, image: newPath },
+        placeData: { id: dbResult.insertId, title: title, image: newPath },
       });
     } catch (err) {
       console.log(err);
