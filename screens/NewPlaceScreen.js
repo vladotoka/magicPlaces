@@ -13,6 +13,7 @@ import { CommonActions } from '@react-navigation/native';
 import Colors from '../constants/Colors';
 import * as placesActions from '../store/places-actions';
 import ImagePicker from '../components/ImagePicker';
+import LocationPicker from '../components/LocationPicker';
 
 const NewPlaceScren = (props) => {
   const [titleValue, setTitlevalue] = useState('');
@@ -46,6 +47,7 @@ const NewPlaceScren = (props) => {
           onChangeText={titleChangeHandler}
         />
         <ImagePicker onImageTaken={imageTakenHandler} />
+        <LocationPicker />
         <Button
           title="запази"
           color={Colors.primary}
