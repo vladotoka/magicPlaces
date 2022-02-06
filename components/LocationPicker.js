@@ -11,6 +11,7 @@ import React, { useState } from 'react';
 import * as Location from 'expo-location';
 
 import Colors from '../constants/Colors';
+import MapPreview from './MapPreview';
 
 const LocationPicker = (props) => {
   const [pickedLocation, setPickedLocation] = useState(null);
@@ -43,15 +44,16 @@ const LocationPicker = (props) => {
 
   return (
     <View style={styles.locationPicker}>
-      <View style={styles.mapPreview}>
+        <MapPreview style={styles.mapPreview} location={pickedLocation}>
         {isFetching ? (
-          <ActivityIndicator size="large" color={Colors.primary} />
-        ) : (
-          <Text>Не е избрана локация!</Text>
-        )}
-        {errorMsg && <Text>{errorMsg}</Text>}
-        {pickedLocation && <Text>{JSON.stringify(pickedLocation)}</Text>}
-      </View>
+      <ActivityIndicator size="large" color={Colors.primary} />
+    ) : (
+      <Text>Не е избрана локация!</Text>
+    )}
+    {errorMsg && <Text>{errorMsg}</Text>}
+    {pickedLocation && <Text>{JSON.stringify(pickedLocation)}</Text>}
+
+        </MapPreview>
       <Button
         title="вземи текущи координати"
         color={Colors.primary}
@@ -66,13 +68,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   mapPreview: {
-    margin: 10,
+    marginBottom: 10,
     width: '100%',
     height: 150,
     borderColor: '#ccc',
     borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
 });
 
