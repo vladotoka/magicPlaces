@@ -6,7 +6,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 
@@ -16,9 +16,9 @@ import ImagePicker from '../components/ImagePicker';
 import LocationPicker from '../components/LocationPicker';
 
 const NewPlaceScren = (props) => {
+  
   const [titleValue, setTitlevalue] = useState('');
   const [selectedImage, setSelectedImage] = useState();
-
   const dispatch = useDispatch();
 
   const titleChangeHandler = (text) => {
@@ -36,18 +36,19 @@ const NewPlaceScren = (props) => {
     setSelectedImage(imagePath);
   };
 
+
   return (
     <ScrollView>
       <View style={styles.form}>
         <Text style={styles.label}>Добави ново място</Text>
         <TextInput
           style={styles.textInput}
-          placeholder="име"
+          placeholder='kotka'
           value={titleValue}
           onChangeText={titleChangeHandler}
         />
         <ImagePicker onImageTaken={imageTakenHandler} />
-        <LocationPicker />
+        <LocationPicker navigation={props.navigation} />
         <Button
           title="запази"
           color={Colors.primary}

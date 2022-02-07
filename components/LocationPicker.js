@@ -42,23 +42,33 @@ const LocationPicker = (props) => {
     setIsFetching(false);
   };
 
+  const pickOnMapHandler = () => {
+    props.navigation.navigate('Map');
+  };
+
   return (
     <View style={styles.locationPicker}>
-        <MapPreview style={styles.mapPreview} location={pickedLocation}>
+      <MapPreview style={styles.mapPreview} location={pickedLocation} onPress={pickOnMapHandler}>
         {isFetching ? (
-      <ActivityIndicator size="large" color={Colors.primary} />
-    ) : (
-      <Text>Не е избрана локация!</Text>
-    )}
-    {errorMsg && <Text>{errorMsg}</Text>}
-    {pickedLocation && <Text>{JSON.stringify(pickedLocation)}</Text>}
-
-        </MapPreview>
-      <Button
-        title="вземи текущи координати"
-        color={Colors.primary}
-        onPress={getLocationHandler}
-      />
+          <ActivityIndicator size="large" color={Colors.primary} />
+        ) : (
+          <Text>Не е избрана локация!</Text>
+        )}
+        {errorMsg && <Text>{errorMsg}</Text>}
+        {pickedLocation && <Text>{JSON.stringify(pickedLocation)}</Text>}
+      </MapPreview>
+      <View style={styles.actions}>
+        <Button
+          title="GPS позиция"
+          color={Colors.primary}
+          onPress={getLocationHandler}
+        />
+        <Button
+          title="посочи на карта"
+          color={Colors.primary}
+          onPress={pickOnMapHandler}
+        />
+      </View>
     </View>
   );
 };
@@ -74,6 +84,11 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderWidth: 1,
   },
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%'
+  }
 });
 
 export default LocationPicker;

@@ -1,4 +1,4 @@
-import { StyleSheet, Image, View, Text } from 'react-native';
+import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import keys from '../keys';
 import Colors from '../constants/Colors';
@@ -13,7 +13,7 @@ const MapPreview = (props) => {
   }
 
   return (
-    <View style={{ ...styles.mapPreview, ...props.style }}>
+    <TouchableOpacity onPress={props.onPress} style={{ ...styles.mapPreview, ...props.style }}>
       {props.location ? (
         <>
           <Image style={styles.mapImage} source={{ uri: imagePreviewUrl }} />
@@ -21,7 +21,7 @@ const MapPreview = (props) => {
       ) : (
         props.children
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
