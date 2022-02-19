@@ -20,8 +20,10 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.places.magic",
+      "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/sacred-adaptive.png",
         "backgroundColor": "#FFFFFF"
       }
     },

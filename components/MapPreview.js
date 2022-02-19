@@ -1,6 +1,6 @@
 import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
-import keys from '../keys';
+import keys from '../env/keys';
 import Colors from '../constants/Colors';
 
 const MapPreview = (props) => {

@@ -21,7 +21,7 @@ const MainNavigator = () => {
       }}
     >
       <Stack.Screen
-        name="List"
+        name="List" 
         component={PlacesListScreen}
         options={{ title: 'Всички места' }}
       />
@@ -30,6 +30,7 @@ const MainNavigator = () => {
         name="NewPlace"
         component={NewPlaceScreen}
         options={{ title: 'Ново място' }}
+        initialParams={{ mapPickedLocation: null }}
       />
       <Stack.Screen name="Map" component={MapScreen} />
     </Stack.Navigator>

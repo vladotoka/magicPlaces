@@ -26,7 +26,7 @@ const MapScreen = (props) => {
       return;
     }
     props.navigation.navigate('NewPlace', {
-      pickedLocation: selectedLocation,
+      mapPickedLocation: selectedLocation,
     });
   };
 
