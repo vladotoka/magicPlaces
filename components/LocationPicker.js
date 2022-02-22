@@ -20,6 +20,8 @@ const LocationPicker = (props) => {
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [isFetching, setIsFetching] = useState(false);
 	const { mapPickedLocation } = props.route.params; //nav v6 destruct
+	const { onLocationPicked } = props;
+
 
 	const pickOnMapHandler = () => {
 		props.navigation.navigate('Map');
@@ -40,7 +42,7 @@ const LocationPicker = (props) => {
 				lat: location.coords.latitude,
 				lng: location.coords.longitude,
 			});
-			props.onLocationPicked({
+			onLocationPicked({
 				lat: location.coords.latitude,
 				lng: location.coords.longitude,
 			});
@@ -52,8 +54,6 @@ const LocationPicker = (props) => {
 		}
 		setIsFetching(false);
 	};
-
-	const { onLocationPicked } = props;
 
 	useEffect(() => {
 		if (mapPickedLocation) {

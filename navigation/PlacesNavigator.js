@@ -25,14 +25,14 @@ const MainNavigator = () => {
         component={PlacesListScreen}
         options={{ title: 'Всички места' }}
       />
-      <Stack.Screen name="PlaceDetail" component={PlaceDetailScreen} />
+      <Stack.Screen name="PlaceDetail" component={PlaceDetailScreen} options={{ title: 'Подробни данни' }}/>
       <Stack.Screen
         name="NewPlace"
         component={NewPlaceScreen}
         options={{ title: 'Ново място' }}
         initialParams={{ mapPickedLocation: null }}
       />
-      <Stack.Screen name="Map" component={MapScreen} />
+      <Stack.Screen name="Map" component={MapScreen}  options={{ title: 'Карта' }} initialParams={{ readonly: null, initialLocation: null }}/>
     </Stack.Navigator>
   );
 };

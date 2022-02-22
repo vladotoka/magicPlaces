@@ -3,7 +3,7 @@
     "name": "magicPlaces",
     "slug": "magicPlaces",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/sacred.png",
     "splash": {
       "image": "./assets/sacred.png",

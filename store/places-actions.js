@@ -31,12 +31,24 @@ export const addPlace = (title, image, location) => {
 				from: image,
 				to: newPath,
 			});
-			const dbResult = await insertPlace(title, newPath, address, location.lat, location.lng);
+			const dbResult = await insertPlace(
+				title,
+				newPath,
+				address,
+				location.lat,
+				location.lng
+			);
 			console.log(dbResult);
 
 			dispatch({
 				type: ADD_PLACE,
-				placeData: { id: dbResult.insertId, title: title, image: newPath },
+				placeData: {
+					id: dbResult.insertId,
+					title: title,
+					image: newPath,
+					address: address,
+					coords: { lat: location.lat, lng: location.lng },
+				},
 			});
 		} catch (err) {
 			console.log(err);
@@ -58,3 +70,4 @@ export const loadPlaces = () => {
 		}
 	};
 };
+
