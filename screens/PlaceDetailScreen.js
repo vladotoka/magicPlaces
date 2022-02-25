@@ -28,6 +28,17 @@ const PlaceDetailScreen = (props) => {
 	const [modalVisible, setModalVisible] = useState(false);
 	const selectedLocation = { lat: selectedPlace.lat, lng: selectedPlace.lng };
 
+	// const deleteItemHandler = async () => {
+	// 	//TODO изтрива мястото само в SQL, но не и в redux!
+	// 	try {
+	// 		// await deletePlace(placeId);
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 		throw err;
+	// 	}
+	// 	//  dispatch(placesActions.loadPlaces());
+	// 	props.navigation.dispatch(CommonActions.goBack());
+	// };
 	const deleteItemHandler = async () => {
 		//TODO изтрива мястото само в SQL, но не и в redux!
 		try {
@@ -39,6 +50,7 @@ const PlaceDetailScreen = (props) => {
 		//  dispatch(placesActions.loadPlaces());
 		props.navigation.dispatch(CommonActions.goBack());
 	};
+
 
 	const coordsToClipboard = () => {
 		// pushing coordinates to clipboard
