@@ -39,7 +39,7 @@ const PlaceDetailScreen = (props) => {
 	// 	//  dispatch(placesActions.loadPlaces());
 	// 	props.navigation.dispatch(CommonActions.goBack());
 	// };
-	//42
+	//42 :)
 	const deleteItemHandler = async () => {
 		//TODO изтрива мястото само в SQL, но не и в redux!
 		try {
