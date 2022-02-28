@@ -14,7 +14,7 @@ init()
     console.log('Initialized database');
   })
   .catch((err) => {
-    console.log(`Initialized DB failed with error: ${err}`);
+    console.error(`Initialized DB failed with error: ${err}`);
   });
 
 const rootReducer = combineReducers({
