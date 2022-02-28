@@ -24,7 +24,6 @@ const MainNavigator = () => {
 				name="List"
 				component={PlacesListScreen}
 				options={{ title: 'Всички места' }}
-				initialParams={{ shouldReloadPlacesDB: false }}
 			/>
 			<Stack.Screen
 				name="PlaceDetail"

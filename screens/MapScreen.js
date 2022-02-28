@@ -20,6 +20,8 @@ const MapScreen = (props) => {
 	};
 
 	const savePickedLocationHandler = () => {
+		console.log('save inv');
+		console.log(selectedLocation);
 		if (!selectedLocation) {
 			Alert.alert('Упс', 'Не сте избрали позиция!');
 			return;

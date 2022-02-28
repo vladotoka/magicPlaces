@@ -5,7 +5,6 @@ import {
 	Text,
 	TextInput,
 	View,
-	Alert,
 } from 'react-native';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
@@ -29,28 +28,8 @@ const NewPlaceScren = (props) => {
 	};
 
 	const savePlaceHandler = () => {
-		//проверка на необходими данни за запис и генериране на съобщение за грешка
-		let validationMessage = '';
-		if (!titleValue) {
-			validationMessage += ' наименование';
-		}
-		if (!selectedImage) {
-			if (!titleValue && !selectedLocation) {validationMessage +=',';} else if(!titleValue) {validationMessage +=' и';}
-			validationMessage += ' снимка';
-		}
-		if (!selectedLocation) {
-			if (!titleValue || !selectedImage) {validationMessage +=' и';}
-			validationMessage += ' локация';
-		}
-		if (validationMessage) {
-			validationMessage = 'Моля добавете ' + validationMessage;
-			Alert.alert('Непълни данни!', validationMessage);
-			return;
-		}
-
-		dispatch(
-			placesActions.addPlace(titleValue, selectedImage, selectedLocation)
-		);
+		dispatch(placesActions.addPlace(titleValue, selectedImage, selectedLocation));
+		console.log('saved');
 		props.navigation.dispatch(CommonActions.goBack());
 	};
 
@@ -59,9 +38,9 @@ const NewPlaceScren = (props) => {
 	};
 
 	const locationPickedHandler = useCallback((location) => {
-		setSelectedLocation(location);
-		// console.log('recieved in newSreeen');
-		// console.log(location);
+    setSelectedLocation(location);
+		console.log('recieved in newSreeen');
+		console.log(location);
 	}, []);
 
 	return (

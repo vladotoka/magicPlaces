@@ -1,4 +1,4 @@
-import { ADD_PLACE, SET_PLACES, DELETE_ITEM } from './places-actions';
+import { ADD_PLACE, SET_PLACES } from './places-actions';
 import Place from '../models/place';
 
 const initialState = {
@@ -33,13 +33,6 @@ export default (state = initialState, action) => {
 			return {
 				places: state.places.concat(newPlace),
 			};
-			case DELETE_ITEM:
-				console.log('reducer:should delete id', action.id);
-				// console.log(state.places);
-				const updatedPlaces = state.places.filter((item) => item.id !== action.id);
-				console.log(updatedPlaces);
-				return {places: updatedPlaces}
-
 		default:
 			return state;
 	}
