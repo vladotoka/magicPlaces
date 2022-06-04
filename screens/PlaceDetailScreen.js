@@ -53,7 +53,7 @@ const PlaceDetailScreen = (props) => {
 		setModalVisible(true);
 		setTimeout(() => {
 			setModalVisible(false);
-		}, 1000);
+		}, 1900);
 	};
 
 	const showMapHandler = () => {
