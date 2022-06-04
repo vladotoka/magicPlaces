@@ -4,6 +4,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as placesActions from '../store/places-actions';
+import keys from '../env/keys';
 
 import HeaderButton from '../components/HeaderButton';
 import PlaceItem from '../components/PlaceItem';
@@ -18,11 +19,13 @@ const PlacesListScreen = (props) => {
 	// console.log(places[0]);
 	const [bulgarianDate, setBulgarianDate] = useState(null);
 	const [gregorianDate, setGregorianDate] = useState();
+	const [moonInfo, setMoonInfo] = useState();
+	const dateNow = new Date().getDate();
 
 	const fetchBgDate = async () => {
-		const dateNow = new Date().getDate();
-		//if date is not changed then return
-		if (dateNow === gregorianDate) {
+		console.log('feth календар и луна inv');
+		//if date is the same and bulgarinDate is previously fetched then return
+		if (dateNow === gregorianDate && bulgarianDate) {
 			return;
 		}
 		//else fetch data from bgcalndar api
@@ -39,6 +42,29 @@ const PlacesListScreen = (props) => {
 		} catch (err) {
 			setBulgarianDate('неизвестна дата');
 			console.error(`Упс. Проблем с бг календар API:${err}`);
+		}
+	};
+
+	const fetchMoonInfo = async () => {
+		//if date is the same and moonInfo is previously fetched then return
+		if (dateNow === gregorianDate && moonInfo) {
+			return;
+		}
+
+		// else fetch moon data from wether API
+		try {
+			const response = await fetch(
+				`https://api.weatherapi.com/v1/astronomy.json?key=${keys.weatherApiKey}&q=Burgas`
+			);
+			if (!response.ok) {
+				throw new Error('Упс. Проблем с бг weather API: Response is not OK');
+			}
+			const resData = await response.json();
+			setMoonInfo(resData);
+			console.log(resData);
+		} catch (err) {
+			// setBulgarianDate('неизвестна дата');
+			console.error(`Упс. Проблем с weather API:${err}`);
 		}
 	};
 
@@ -59,6 +85,7 @@ const PlacesListScreen = (props) => {
 	useLayoutEffect(() => {
 		if (isFocused) {
 			fetchBgDate();
+			fetchMoonInfo();
 		}
 	}, [isFocused]);
 
@@ -69,6 +96,20 @@ const PlacesListScreen = (props) => {
 	return (
 		<View>
 			{bulgarianDate && <Text>днес е {bulgarianDate}година</Text>}
+			{moonInfo && (
+				<>
+					<Text>
+						луна{'      '}{moonInfo.astronomy.astro.moonrise}-
+						{moonInfo.astronomy.astro.moonset}{' '}
+						{moonInfo.astronomy.astro.moon_illumination}%{' '}
+						{moonInfo.astronomy.astro.moon_phase}
+					</Text>
+					<Text>
+						слънце {moonInfo.astronomy.astro.sunrise}-
+						{moonInfo.astronomy.astro.sunset}
+					</Text>
+				</>
+			)}
 			<FlatList
 				data={places}
 				renderItem={(itemData) => (
