@@ -14,7 +14,7 @@ import Colors from '../constants/Colors';
 import MapPreview from './MapPreview';
 
 const LocationPicker = (props) => {
-	//INFO: props.navigation and props.route here are accesabble
+	//INFO: props.navigation and props.route here are accessible
 
 	const [pickedLocation, setPickedLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState(null);
@@ -37,7 +37,6 @@ const LocationPicker = (props) => {
 		try {
 			setIsFetching(true);
 			const location = await Location.getCurrentPositionAsync();
-			console.log(location);
 			setPickedLocation({
 				lat: location.coords.latitude,
 				lng: location.coords.longitude,

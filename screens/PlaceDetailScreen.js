@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
 	StyleSheet,
 	Text,
@@ -22,44 +22,38 @@ import * as placesActions from '../store/places-actions';
 const PlaceDetailScreen = (props) => {
 	const { placeId } = props.route.params; //nav v6 destruct
 	const dispatch = useDispatch();
-	const selectedPlace = useSelector((state) =>
-		state.places.places.find((place) => place.id === placeId)
-	);
 	const [modalVisible, setModalVisible] = useState(false);
+	const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
+	const selectedPlace = useCallback(
+		useSelector((state) =>
+			state.places.places.find((place) => place.id === placeId)
+		),
+		[placeId]
+	);
 	const selectedLocation = { lat: selectedPlace.lat, lng: selectedPlace.lng };
 
-	// const deleteItemHandler = async () => {
-	// 	//TODO изтрива мястото само в SQL, но не и в redux!
-	// 	try {
-	// 		// await deletePlace(placeId);
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 		throw err;
-	// 	}
-	// 	//  dispatch(placesActions.loadPlaces());
-	// 	props.navigation.dispatch(CommonActions.goBack());
-	// };
-	//42 :)
 	const deleteItemHandler = async () => {
 		//TODO изтрива мястото само в SQL, но не и в redux!
 		try {
-			// await deletePlace(placeId);
+			await deletePlace(placeId);
+			console.log('db delet inv');
 		} catch (err) {
 			console.log(err);
 			throw err;
 		}
-		//  dispatch(placesActions.loadPlaces());
-		props.navigation.dispatch(CommonActions.goBack());
+		// dispatch(placesActions.deleteItem(placeId));
+		//TEMP dispatch reload DB
+		dispatch(placesActions.loadPlaces());
+		props.navigation.navigate('List');
 	};
 
-
 	const coordsToClipboard = () => {
-		// pushing coordinates to clipboard
+		// copy coordinates to clipboard
 		Clipboard.setString(`${selectedPlace.lat}, ${selectedPlace.lng}`);
 		setModalVisible(true);
 		setTimeout(() => {
 			setModalVisible(false);
-		}, 1000);
+		}, 1900);
 	};
 
 	const showMapHandler = () => {
@@ -90,19 +84,44 @@ const PlaceDetailScreen = (props) => {
 					</View>
 				</Modal>
 			</View>
+			<View style={styles.centeredView}>
+				<Modal
+					animationType="slide"
+					transparent={true}
+					visible={modalDeleteVisible}
+					onRequestClose={() => {
+						Alert.alert('Отменено изтриване.');
+						setModalDeleteVisible(!modalDeleteVisible);
+					}}
+				>
+					<View style={styles.centeredView}>
+						<View style={styles.modalView}>
+							<Text style={styles.modalText}>
+								Моля потвърдете изтриване на {selectedPlace.title}?
+							</Text><View style={{width: '90%', flexDirection: 'row', justifyContent: 'space-around'}}>
+							<Button title="изтриване" onPress={deleteItemHandler} />
+							<Button title="отмени" onPress={() => {setModalDeleteVisible(false)}} /></View>
+						</View>
+					</View>
+				</Modal>
+			</View>
 			<Image style={styles.image} source={{ uri: selectedPlace.imageUri }} />
 			<View style={styles.locationContainer}>
 				<View style={styles.addressContainer}>
 					<Text style={styles.address}>{selectedPlace.address}</Text>
 				</View>
-				<MapPreview style={styles.mapPreview} location={selectedLocation} onPress={showMapHandler}/>
+				<MapPreview
+					style={styles.mapPreview}
+					location={selectedLocation}
+					onPress={showMapHandler}
+				/>
 				<TouchableWithoutFeedback onPress={coordsToClipboard}>
 					<Text style={styles.address}>
 						lat:{selectedPlace.lat} lon:{selectedPlace.lng}
 					</Text>
 				</TouchableWithoutFeedback>
 			</View>
-			<Button title="изтрий" onPress={deleteItemHandler} />
+			<Button title="изтрий" onPress={()=>{setModalDeleteVisible(true)}} />
 		</ScrollView>
 	);
 };
