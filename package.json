@@ -34,7 +34,9 @@
     "react-navigation-header-buttons": "^10.0.0",
     "react-redux": "^7.2.9",
     "redux": "^4.2.0",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "expo-constants": "~14.0.2",
+    "expo-application": "~5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3"

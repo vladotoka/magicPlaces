@@ -1,4 +1,4 @@
-import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import keys from '../env/keys';
 import Colors from '../constants/Colors';
@@ -8,7 +8,8 @@ const MapPreview = (props) => {
   let imagePreviewUrl;
 
   if (props.location) {
-    imagePreviewUrl = `https://open.mapquestapi.com/staticmap/v5/map?key=${keys.mapquestApiKey}&size=400,200&zoom=14&locations=${props.location.lat},${props.location.lng}&defaultMarker=marker-${markerColor}`;
+    imagePreviewUrl = `https://www.mapquestapi.com/staticmap/v5/map?key=${keys.mapquestApiKey}&size=400,200&zoom=14&locations=${props.location.lat},${props.location.lng}&defaultMarker=marker-${markerColor}`;
+    // imagePreviewUrl = `https://api.tomtom.com/map/1/staticimage?key=${keys.tomtomApiKey}&zoom=12&center=${props.location.lng},${props.location.lat}&format=jpg&layer=basic&style=main&width=400&height=200&view=Unified&language=bg-BG`;
     console.log(imagePreviewUrl);
   }
 
