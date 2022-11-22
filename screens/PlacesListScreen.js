@@ -30,7 +30,7 @@ const PlacesListScreen = (props) => {
 				</HeaderButtons>
 			),
 		});
-	}, [props.navigaton]);
+	}, [props.navigation]);
 
 	useEffect(() => {
 		dispatch(placesActions.loadPlaces());

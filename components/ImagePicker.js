@@ -30,8 +30,10 @@ const ImgPicker = (props) => {
 			aspect: [16, 9],
 			quality: 0.5,
 		});
+		console.log(image.assets);
 
-		if (!image.cancelled) {
+
+		if (!image.canceled) {
 			// dummy fixing ImagePicker bug in EXPO SDK46
 			//TODO remove this bugfix with next EXPO SDK release
 			const dummyManipulationResult = await ImageManipulator.manipulateAsync(
@@ -43,7 +45,6 @@ const ImgPicker = (props) => {
 
 			// setPickedImage(image.uri);
 			// props.onImageTaken(image.uri);
-
 			setPickedImage(dummyManipulationResult.uri);
 			props.onImageTaken(dummyManipulationResult.uri);
 		}

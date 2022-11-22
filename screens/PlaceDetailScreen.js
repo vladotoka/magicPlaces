@@ -36,7 +36,7 @@ const PlaceDetailScreen = (props) => {
 		//TODO изтрива мястото само в SQL, но не и в redux!
 		try {
 			await deletePlace(placeId);
-			console.log('db delet inv');
+			console.log('db delete inv');
 		} catch (err) {
 			console.log(err);
 			throw err;
@@ -49,7 +49,7 @@ const PlaceDetailScreen = (props) => {
 
 	const coordsToClipboard = () => {
 		// copy coordinates to clipboard
-		Clipboard.setString(`${selectedPlace.lat}, ${selectedPlace.lng}`);
+		Clipboard.setStringAsync(`${selectedPlace.lat}, ${selectedPlace.lng}`);
 		setModalVisible(true);
 		setTimeout(() => {
 			setModalVisible(false);
