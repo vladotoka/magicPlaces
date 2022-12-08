@@ -34,19 +34,8 @@ const ImgPicker = (props) => {
 
 
 		if (!image.canceled) {
-			// dummy fixing ImagePicker bug in EXPO SDK46
-			//TODO remove this bugfix with next EXPO SDK release
-			const dummyManipulationResult = await ImageManipulator.manipulateAsync(
-				image.uri,
-				[],
-				{}
-			);
-			//end of dummy fix...
-
-			// setPickedImage(image.uri);
-			// props.onImageTaken(image.uri);
-			setPickedImage(dummyManipulationResult.uri);
-			props.onImageTaken(dummyManipulationResult.uri);
+			setPickedImage(image.uri);
+			props.onImageTaken(image.uri);
 		}
 	};
 

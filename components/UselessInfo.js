@@ -2,14 +2,31 @@ import { StyleSheet, Text, View } from 'react-native';
 import React, { useState, useLayoutEffect } from 'react';
 import keys from '../env/keys';
 import * as Application from 'expo-application';
+import * as Location from 'expo-location';
 
 const UselessInfo = ({ isFocused }) => {
 	const [bulgarianDate, setBulgarianDate] = useState(null);
 	const [gregorianDate, setGregorianDate] = useState();
+	const [location, setLocation] = useState();
 	const [moonInfo, setMoonInfo] = useState();
 	const dateNow = new Date().getDate();
 	const buildVersion = Application.nativeBuildVersion;
 	const appVersion = Application.nativeApplicationVersion;
+
+	const getLastKnowLocation = async () => {
+		let { status } = await Location.requestForegroundPermissionsAsync();
+		if (status !== 'granted') {
+		//   setErrorMsg('Permission to access location was denied');
+		  return;
+		}
+		let location = await Location.getLastKnownPositionAsync({});
+		// let location = await Location.getCurrentPositionAsync({});
+		
+		setLocation(location);
+		let text = JSON.stringify(location);
+		console.log('getLastKnowLocation');
+		console.log(location);
+	}
 
 	const fetchBgDate = async () => {
 		console.log('fetch календар и луна inv');
@@ -43,10 +60,10 @@ const UselessInfo = ({ isFocused }) => {
 		// else fetch moon data from wether API
 		try {
 			const response = await fetch(
-				`https://api.weatherapi.com/v1/astronomy.json?key=${keys.weatherApiKey}&q=Burgas`
+				`https://api.weatherapi.com/v1/astronomy.json?key=${keys.weatherApiKey}&q=Ruse`
 			);
 			if (!response.ok) {
-				throw new Error('Упс. Проблем с бг weather API: Response is not OK');
+				throw new Error('Упс. Проблем с weather API: Response is not OK');
 			}
 			const resData = await response.json();
 			setMoonInfo(resData);
@@ -65,6 +82,7 @@ const UselessInfo = ({ isFocused }) => {
 	useLayoutEffect(() => {
 		const getData = async () => {
 			await fetchBgDate();
+			await getLastKnowLocation();
 			await fetchMoonInfo();
 		};
 		if (isFocused) {
@@ -73,7 +91,7 @@ const UselessInfo = ({ isFocused }) => {
 	}, [isFocused]);
 
 	return (
-		<View>
+		<View style={styles.container}>
 			<Text>
 				app version:{appVersion} build version:{buildVersion}
 			</Text>
@@ -98,6 +116,10 @@ const UselessInfo = ({ isFocused }) => {
 	);
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+	container: {
+		marginHorizontal: 10,
+	},
+});
 
 export default UselessInfo;
