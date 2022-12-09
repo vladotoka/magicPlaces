@@ -6,8 +6,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 # [1.1.43] (2022-12-08)
 
 ### Other Fixes
-* in ImagePicker.js
-removed dummy fixing bug in EXPO SDK46- ImageManipulator.manipulateAsync
+* removed dummy fixing bug in EXPO SDK46
+    - in ImagePicker.js
+        - removed middleware hack with ImageManipulator.manipulateAsync
+* fixed app crash during rendering the map view
+    - in MapScreen.js
+        - added PROVIDER_GOOGLE
+    - in  app.json
+        - added  apiKey
+
+### Deprecated Fixes
+* replaced deprecated uri key in the image picker result with uri key in the new "asserts" array
+    -in ImagePicker.js
 
 # [1.1.42] (2022-11-22)
 

@@ -6,7 +6,7 @@ import {
 	Alert,
 } from 'react-native';
 import React, { useState, useLayoutEffect } from 'react';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import Colors from '../constants/Colors';
 const MapScreen = (props) => {
 	const { navigation } = props;
@@ -70,6 +70,7 @@ const MapScreen = (props) => {
 			region={mapRegion}
 			style={styles.map}
 			onPress={selectLocationHandler}
+			provider={PROVIDER_GOOGLE}
 		>
 			{markerCoordinates && (
 				<Marker title="маркер" coordinate={markerCoordinates}></Marker>

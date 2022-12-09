@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	View,
+	Linking,
+	TouchableOpacity,
+} from 'react-native';
 import React, { useState, useLayoutEffect } from 'react';
 import keys from '../env/keys';
 import * as Application from 'expo-application';
@@ -8,25 +14,43 @@ const UselessInfo = ({ isFocused }) => {
 	const [bulgarianDate, setBulgarianDate] = useState(null);
 	const [gregorianDate, setGregorianDate] = useState();
 	const [location, setLocation] = useState();
+	const [locationLabel, setLocationLabel] = useState('Basarbovo');
 	const [moonInfo, setMoonInfo] = useState();
 	const dateNow = new Date().getDate();
 	const buildVersion = Application.nativeBuildVersion;
 	const appVersion = Application.nativeApplicationVersion;
 
+	const getLocation = async () => {
+		//TODO list
+		//провери за локация в redux store / check for location in redux store
+		//опитай се да вземеш текуща локация / try go get current location
+		//предложи избор за използване на запазени данни локация / suggest to use the stored location data
+		//или промени state текуща локация при успех / or change state current location when the response is resolved
+		//reverse geocode => currentLocationLabel
+		//setLocationLabel(currentLocationLabel);
+		//return;
+
+		await getLastKnowLocation();
+		if (location) {
+			const response = true;
+		}
+		// return { Object };
+	};
+
 	const getLastKnowLocation = async () => {
 		let { status } = await Location.requestForegroundPermissionsAsync();
 		if (status !== 'granted') {
-		//   setErrorMsg('Permission to access location was denied');
-		  return;
+			//   setErrorMsg('Permission to access location was denied');
+			return;
 		}
 		let location = await Location.getLastKnownPositionAsync({});
 		// let location = await Location.getCurrentPositionAsync({});
-		
-		setLocation(location);
+
 		let text = JSON.stringify(location);
+		setLocation(location);
 		console.log('getLastKnowLocation');
 		console.log(location);
-	}
+	};
 
 	const fetchBgDate = async () => {
 		console.log('fetch календар и луна inv');
@@ -60,7 +84,7 @@ const UselessInfo = ({ isFocused }) => {
 		// else fetch moon data from wether API
 		try {
 			const response = await fetch(
-				`https://api.weatherapi.com/v1/astronomy.json?key=${keys.weatherApiKey}&q=Ruse`
+				`https://api.weatherapi.com/v1/astronomy.json?key=${keys.weatherApiKey}&q=${locationLabel}`
 			);
 			if (!response.ok) {
 				throw new Error('Упс. Проблем с weather API: Response is not OK');
@@ -82,7 +106,7 @@ const UselessInfo = ({ isFocused }) => {
 	useLayoutEffect(() => {
 		const getData = async () => {
 			await fetchBgDate();
-			await getLastKnowLocation();
+			await getLocation();
 			await fetchMoonInfo();
 		};
 		if (isFocused) {
@@ -95,7 +119,7 @@ const UselessInfo = ({ isFocused }) => {
 			<Text>
 				app version:{appVersion} build version:{buildVersion}
 			</Text>
-			<Text>AstroData</Text>
+			<Text>AstroData за {locationLabel}</Text>
 			{bulgarianDate && <Text>днес е {bulgarianDate}година</Text>}
 			{moonInfo && (
 				<>

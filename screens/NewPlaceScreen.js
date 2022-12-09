@@ -16,8 +16,8 @@ import * as placesActions from '../store/places-actions';
 import ImagePicker from '../components/ImagePicker';
 import LocationPicker from '../components/LocationPicker';
 
-const NewPlaceScren = (props) => {
-	const [titleValue, setTitlevalue] = useState('');
+const NewPlaceScreen = (props) => {
+	const [titleValue, setTitleValue] = useState('');
 	const [selectedImage, setSelectedImage] = useState();
 	const [selectedLocation, setSelectedLocation] = useState();
 
@@ -25,7 +25,7 @@ const NewPlaceScren = (props) => {
 
 	const titleChangeHandler = (text) => {
 		//TODO add some text validation
-		setTitlevalue(text);
+		setTitleValue(text);
 	};
 
 	const savePlaceHandler = () => {
@@ -60,8 +60,6 @@ const NewPlaceScren = (props) => {
 
 	const locationPickedHandler = useCallback((location) => {
 		setSelectedLocation(location);
-		// console.log('recieved in newSreeen');
-		// console.log(location);
 	}, []);
 
 	return (
@@ -107,4 +105,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default NewPlaceScren;
+export default NewPlaceScreen;
