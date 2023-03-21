@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.45] (2023-03-21)
+
+### Packages Updates
+*   "expo": "^48.0.7",
+*   "expo-application": "~5.1.1",
+*   "expo-clipboard": "~4.1.2",
+*   "expo-constants": "~14.2.1",
+*   "expo-file-system": "~15.2.2",
+*   "expo-image-manipulator": "~11.1.1",
+*   "expo-image-picker": "~14.1.1",
+*   "expo-location": "~15.1.1",
+*   "expo-sqlite": "~11.1.1",
+*   "expo-status-bar": "~1.4.4",
+*   "react": "18.2.0",
+*   "react-dom": "18.2.0",
+*   "react-native": "0.71.4"
+*   "react-native-gesture-handler": "~2.9.0",
+*   "react-native-safe-area-context": "4.5.0",
+*   "react-native-screens": "~3.20.0",
+
+### Known Issues 
+* bad logic for api calls- astro and bgcalendar
+* select location option start from map centered in Burgas
+
 # [1.1.43] (2022-12-08)
 
 ### Other Fixes
