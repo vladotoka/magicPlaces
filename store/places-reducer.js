@@ -17,7 +17,8 @@ export default (state = initialState, action) => {
 							pl.imageUri,
 							pl.address,
 							pl.lat,
-							pl.lng
+							pl.lng,
+							pl.dateOfCreation
 						)
 				),
 			};
@@ -28,17 +29,20 @@ export default (state = initialState, action) => {
 				action.placeData.image,
 				action.placeData.address,
 				action.placeData.coords.lat,
-				action.placeData.coords.lng
+				action.placeData.coords.lng,
+				action.placeData.dateOfCreation
 			);
 			return {
 				places: state.places.concat(newPlace),
 			};
-			case DELETE_ITEM:
-				console.log('reducer:should delete id', action.id);
-				// console.log(state.places);
-				const updatedPlaces = state.places.filter((item) => item.id !== action.id);
-				console.log(updatedPlaces);
-				return {places: updatedPlaces}
+		case DELETE_ITEM:
+			console.log('reducer:should delete id', action.id);
+			// console.log(state.places);
+			const updatedPlaces = state.places.filter(
+				(item) => item.id !== action.id
+			);
+			console.log(updatedPlaces);
+			return { places: updatedPlaces };
 
 		default:
 			return state;

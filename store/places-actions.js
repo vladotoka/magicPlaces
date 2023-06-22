@@ -8,7 +8,7 @@ export const ADD_PLACE = 'ADD_PLACE';
 export const SET_PLACES = 'SET_PLACES';
 export const DELETE_ITEM = 'DELETE_ITEM';
 
-export const addPlace = (title, image, location) => {
+export const addPlace = (title, image, location, dateOfCreation) => {
 	return async (dispatch) => {
 		// 	`https://api.geoapify.com/v1/geocode/reverse?lat=${location.lat}&lon=${location.lng}&apiKey=${keys.geoapifyApiKey}`
 		const response = await fetch(
@@ -42,7 +42,8 @@ export const addPlace = (title, image, location) => {
 				newPath,
 				address,
 				location.lat,
-				location.lng
+				location.lng,
+				dateOfCreation
 			);
 
 			dispatch({
@@ -53,6 +54,7 @@ export const addPlace = (title, image, location) => {
 					image: newPath,
 					address: address,
 					coords: { lat: location.lat, lng: location.lng },
+					dateOfCreation: dateOfCreation
 				},
 			});
 		} catch (err) {

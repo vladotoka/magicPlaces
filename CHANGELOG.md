@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.46]-beta/not builded (last update 2023-06-22)
+
+### Other Fixes
+* SQLite DB schema- version 2: new column dateOfCreation and new table schema-version
+
+### Packages Updates
+*    "react-native": "0.71.8",
+
+### Known Issues 
+* bad logic for api calls- astro and bgcalendar
+* select location option start from map centered in Burgas
+* 'createStore' is deprecated. Redux team recommend using the configureStore method of the @reduxjs/toolkit package, which replaces createStore
+
+
 # [1.1.45] (2023-03-21)
 
 ### Packages Updates

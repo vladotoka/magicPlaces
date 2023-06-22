@@ -17,7 +17,6 @@ const PlacesListScreen = (props) => {
 	const dispatch = useDispatch();
 	const places = useSelector((state) => state.places.places);
 
-
 	useLayoutEffect(() => {
 		props.navigation.setOptions({
 			headerRight: () => (
@@ -37,7 +36,7 @@ const PlacesListScreen = (props) => {
 	}, [dispatch]);
 
 	return (
-		<View style={{flex: 1}}>
+		<View style={{ flex: 1 }}>
 			<UselessInfo isFocused={isFocused} />
 			<FlatList
 				data={places}
@@ -46,6 +45,7 @@ const PlacesListScreen = (props) => {
 						title={itemData.item.title}
 						address={itemData.item.address}
 						image={itemData.item.imageUri}
+						dateOfCreation={itemData.item.dateOfCreation}
 						onSelect={() => {
 							props.navigation.navigate('PlaceDetail', {
 								placeId: itemData.item.id,

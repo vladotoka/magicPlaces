@@ -2,13 +2,13 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	Linking,
 	TouchableOpacity,
 } from 'react-native';
 import React, { useState, useLayoutEffect } from 'react';
 import keys from '../env/keys';
 import * as Application from 'expo-application';
 import * as Location from 'expo-location';
+import * as Linking from 'expo-linking';
 
 const UselessInfo = ({ isFocused }) => {
 	const [bulgarianDate, setBulgarianDate] = useState(null);
@@ -19,6 +19,8 @@ const UselessInfo = ({ isFocused }) => {
 	const dateNow = new Date().getDate();
 	const buildVersion = Application.nativeBuildVersion;
 	const appVersion = Application.nativeApplicationVersion;
+	const onPress = () => Linking.openURL('https://bgkalendar.com/');
+
 
 	const getLocation = async () => {
 		//TODO list
@@ -58,7 +60,7 @@ const UselessInfo = ({ isFocused }) => {
 		if (dateNow === gregorianDate && bulgarianDate) {
 			return;
 		}
-		//else fetch data from bgcalndar api
+		//else fetch data from bg calendar api
 		try {
 			const response = await fetch(
 				'https://bgkalendar.com/api/v0/calendars/bulgarian/dates/today'
@@ -120,7 +122,11 @@ const UselessInfo = ({ isFocused }) => {
 				app version:{appVersion} build version:{buildVersion}
 			</Text>
 			<Text>AstroData за {locationLabel}</Text>
-			{bulgarianDate && <Text>днес е {bulgarianDate}година</Text>}
+			{(bulgarianDate) && (
+				<TouchableOpacity style={styles.button} onPress={onPress}>
+					<Text>днес е {bulgarianDate}година</Text>
+				</TouchableOpacity>
+			)}
 			{moonInfo && (
 				<>
 					<Text>

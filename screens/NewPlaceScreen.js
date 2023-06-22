@@ -7,7 +7,7 @@ import {
 	View,
 	Alert,
 } from 'react-native';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 
@@ -20,6 +20,9 @@ const NewPlaceScreen = (props) => {
 	const [titleValue, setTitleValue] = useState('');
 	const [selectedImage, setSelectedImage] = useState();
 	const [selectedLocation, setSelectedLocation] = useState();
+	const [dateOfCreation, setDateOfCreation] = useState(
+		'дата на създаване - ще дойде от API'
+	);
 
 	const dispatch = useDispatch();
 
@@ -35,11 +38,17 @@ const NewPlaceScreen = (props) => {
 			validationMessage += ' наименование';
 		}
 		if (!selectedImage) {
-			if (!titleValue && !selectedLocation) {validationMessage +=',';} else if(!titleValue) {validationMessage +=' и';}
+			if (!titleValue && !selectedLocation) {
+				validationMessage += ',';
+			} else if (!titleValue) {
+				validationMessage += ' и';
+			}
 			validationMessage += ' снимка';
 		}
 		if (!selectedLocation) {
-			if (!titleValue || !selectedImage) {validationMessage +=' и';}
+			if (!titleValue || !selectedImage) {
+				validationMessage += ' и';
+			}
 			validationMessage += ' локация';
 		}
 		if (validationMessage) {
@@ -49,7 +58,12 @@ const NewPlaceScreen = (props) => {
 		}
 
 		dispatch(
-			placesActions.addPlace(titleValue, selectedImage, selectedLocation)
+			placesActions.addPlace(
+				titleValue,
+				selectedImage,
+				selectedLocation,
+				dateOfCreation
+			)
 		);
 		props.navigation.dispatch(CommonActions.goBack());
 	};
