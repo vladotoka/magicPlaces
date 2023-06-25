@@ -1,5 +1,5 @@
-import { FlatList, StyleSheet, Text, View, Platform } from 'react-native';
-import React, { useLayoutEffect, useEffect, useState } from 'react';
+import { FlatList, StyleSheet, View, Platform } from 'react-native';
+import React, { useLayoutEffect, useEffect } from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
 

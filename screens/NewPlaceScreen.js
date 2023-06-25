@@ -8,7 +8,7 @@ import {
 	Alert,
 } from 'react-native';
 import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CommonActions } from '@react-navigation/native';
 
 import Colors from '../constants/Colors';
@@ -20,9 +20,7 @@ const NewPlaceScreen = (props) => {
 	const [titleValue, setTitleValue] = useState('');
 	const [selectedImage, setSelectedImage] = useState();
 	const [selectedLocation, setSelectedLocation] = useState();
-	const [dateOfCreation, setDateOfCreation] = useState(
-		'дата на създаване - ще дойде от API'
-	);
+	const dateOfCreation = useSelector((state) => state.places.bulgarianDate);
 
 	const dispatch = useDispatch();
 
@@ -97,6 +95,7 @@ const NewPlaceScreen = (props) => {
 					color={Colors.primary}
 					onPress={savePlaceHandler}
 				/>
+				<Text>{dateOfCreation}</Text>
 			</View>
 		</ScrollView>
 	);

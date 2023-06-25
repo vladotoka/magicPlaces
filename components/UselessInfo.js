@@ -1,14 +1,11 @@
-import {
-	StyleSheet,
-	Text,
-	View,
-	TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React, { useState, useLayoutEffect } from 'react';
 import keys from '../env/keys';
 import * as Application from 'expo-application';
 import * as Location from 'expo-location';
 import * as Linking from 'expo-linking';
+import { useDispatch } from 'react-redux';
+import * as placesActions from '../store/places-actions';
 
 const UselessInfo = ({ isFocused }) => {
 	const [bulgarianDate, setBulgarianDate] = useState(null);
@@ -20,7 +17,7 @@ const UselessInfo = ({ isFocused }) => {
 	const buildVersion = Application.nativeBuildVersion;
 	const appVersion = Application.nativeApplicationVersion;
 	const onPress = () => Linking.openURL('https://bgkalendar.com/');
-
+	const dispatch = useDispatch();
 
 	const getLocation = async () => {
 		//TODO list
@@ -70,6 +67,9 @@ const UselessInfo = ({ isFocused }) => {
 			}
 			const resData = await response.json();
 			setBulgarianDate(resData.longDate);
+			dispatch(
+				placesActions.setBulgarianDateRedux(resData.longDate.toString())
+			);
 			setGregorianDate(dateNow);
 		} catch (err) {
 			setBulgarianDate('неизвестна дата');
@@ -122,7 +122,7 @@ const UselessInfo = ({ isFocused }) => {
 				app version:{appVersion} build version:{buildVersion}
 			</Text>
 			<Text>AstroData за {locationLabel}</Text>
-			{(bulgarianDate) && (
+			{bulgarianDate && (
 				<TouchableOpacity style={styles.button} onPress={onPress}>
 					<Text>днес е {bulgarianDate}година</Text>
 				</TouchableOpacity>

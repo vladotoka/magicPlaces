@@ -98,12 +98,29 @@ const PlaceDetailScreen = (props) => {
 						<View style={styles.modalView}>
 							<Text style={styles.modalText}>
 								Моля потвърдете изтриване на {selectedPlace.title}?
-							</Text><View style={{width: '90%', flexDirection: 'row', justifyContent: 'space-around'}}>
-							<Button title="изтриване" onPress={deleteItemHandler} />
-							<Button title="отмени" onPress={() => {setModalDeleteVisible(false)}} /></View>
+							</Text>
+							<View
+								style={{
+									width: '90%',
+									flexDirection: 'row',
+									justifyContent: 'space-around',
+								}}
+							>
+								<Button title="изтриване" onPress={deleteItemHandler} />
+								<Button
+									title="отмени"
+									onPress={() => {
+										setModalDeleteVisible(false);
+									}}
+								/>
+							</View>
 						</View>
 					</View>
 				</Modal>
+			</View>
+			<View>
+				<Text style={{fontWeight: 'bold'}}>{selectedPlace.title}</Text>
+				<Text>{selectedPlace.dateOfCreation}</Text>
 			</View>
 			<Image style={styles.image} source={{ uri: selectedPlace.imageUri }} />
 			<View style={styles.locationContainer}>
@@ -121,15 +138,20 @@ const PlaceDetailScreen = (props) => {
 					</Text>
 				</TouchableWithoutFeedback>
 			</View>
-			<Button title="изтрий" onPress={()=>{setModalDeleteVisible(true)}} />
+			<Button
+				title="изтрий"
+				onPress={() => {
+					setModalDeleteVisible(true);
+				}}
+			/>
 		</ScrollView>
 	);
 };
 
 const styles = StyleSheet.create({
 	image: {
-		height: '35%',
-		minHeight: 300,
+		height: '20%',
+		minHeight: 200,
 		width: '100%',
 		backgroundColor: '#ccc',
 	},
@@ -165,7 +187,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginTop: 22,
+		// marginTop: 22,
 	},
 	modalView: {
 		margin: 20,

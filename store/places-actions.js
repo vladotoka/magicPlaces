@@ -7,6 +7,7 @@ import { insertPlace, fetchPlaces } from '../helpers/db';
 export const ADD_PLACE = 'ADD_PLACE';
 export const SET_PLACES = 'SET_PLACES';
 export const DELETE_ITEM = 'DELETE_ITEM';
+export const SET_BULGARIANDATE = 'SET_BULGARIANDATE';
 
 export const addPlace = (title, image, location, dateOfCreation) => {
 	return async (dispatch) => {
@@ -54,7 +55,7 @@ export const addPlace = (title, image, location, dateOfCreation) => {
 					image: newPath,
 					address: address,
 					coords: { lat: location.lat, lng: location.lng },
-					dateOfCreation: dateOfCreation
+					dateOfCreation: dateOfCreation,
 				},
 			});
 		} catch (err) {
@@ -78,4 +79,8 @@ export const loadPlaces = () => {
 
 export const deleteItem = (id) => {
 	return { type: DELETE_ITEM, id: id };
+};
+
+export const setBulgarianDateRedux = (bulgarianDate) => {
+	return { type: SET_BULGARIANDATE, bulgarianDate: bulgarianDate };
 };

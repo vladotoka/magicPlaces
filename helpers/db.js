@@ -174,7 +174,7 @@ export const fetchPlaces = () => {
 	const promise = new Promise((resolve, reject) => {
 		db.transaction((tx) => {
 			tx.executeSql(
-				'SELECT * FROM places',
+				'SELECT * FROM places ORDER BY id DESC',
 				[],
 				(_, result) => {
 					resolve(result);
