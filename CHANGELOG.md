@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.1.46]-beta/not builded (last update 2023-06-22)
+# [1.2.1] (2023-09-24)
 
 ### Other Fixes
 * SQLite DB schema- version 2: new column dateOfCreation and new table schema-version
@@ -15,6 +15,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * bad logic for api calls- astro and bgcalendar
 * select location option start from map centered in Burgas
 * 'createStore' is deprecated. Redux team recommend using the configureStore method of the @reduxjs/toolkit package, which replaces createStore
+* white foreground hiding phone status bar
+
+### Proposals for future releases
+* шегор алем
+* offline mode - auto/manual
+* dark/light/auto theme mode
+* edit places
+* drawer menu
+* language support
+
 
 
 # [1.1.45] (2023-03-21)

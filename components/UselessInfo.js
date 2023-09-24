@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	View,
+	TouchableOpacity,
+	TextInput,
+	Button,
+} from 'react-native';
 import React, { useState, useLayoutEffect } from 'react';
 import keys from '../env/keys';
 import * as Application from 'expo-application';
@@ -12,6 +19,7 @@ const UselessInfo = ({ isFocused }) => {
 	const [gregorianDate, setGregorianDate] = useState();
 	const [location, setLocation] = useState();
 	const [locationLabel, setLocationLabel] = useState('Basarbovo');
+	const [editLocationLabel, setEditLocationLabel] = useState(false);
 	const [moonInfo, setMoonInfo] = useState();
 	const dateNow = new Date().getDate();
 	const buildVersion = Application.nativeBuildVersion;
@@ -116,12 +124,32 @@ const UselessInfo = ({ isFocused }) => {
 		}
 	}, [isFocused]);
 
+	const titleChangeHandler = (text) => {
+		//TODO add some text validation
+		setLocationLabel(text);
+	};
+
 	return (
 		<View style={styles.container}>
 			<Text>
 				app version:{appVersion} build version:{buildVersion}
 			</Text>
-			<Text>AstroData за {locationLabel}</Text>
+			<View>
+				<Text>
+					AstroData за{' '}
+					{!editLocationLabel ? (
+						locationLabel
+					) : (
+						<TextInput
+							style={styles.textInput}
+							placeholder="Наименование"
+							value="kotka"
+							onChangeText={titleChangeHandler}
+						/>
+					)}
+				</Text>
+				<Button title={'^^'} onPress={() => setEditLocationLabel(!editLocationLabel)} />
+			</View>
 			{bulgarianDate && (
 				<TouchableOpacity style={styles.button} onPress={onPress}>
 					<Text>днес е {bulgarianDate}година</Text>
