@@ -13,12 +13,13 @@ import * as Location from 'expo-location';
 import * as Linking from 'expo-linking';
 import { useDispatch } from 'react-redux';
 import * as placesActions from '../store/places-actions';
+import Colors from '../constants/Colors';
 
 const UselessInfo = ({ isFocused }) => {
 	const [bulgarianDate, setBulgarianDate] = useState(null);
 	const [gregorianDate, setGregorianDate] = useState();
 	const [location, setLocation] = useState();
-	const [locationLabel, setLocationLabel] = useState('Basarbovo');
+	const [locationLabel, setLocationLabel] = useState('Бургас');
 	const [editLocationLabel, setEditLocationLabel] = useState(false);
 	const [moonInfo, setMoonInfo] = useState();
 	const dateNow = new Date().getDate();
@@ -75,6 +76,7 @@ const UselessInfo = ({ isFocused }) => {
 			}
 			const resData = await response.json();
 			setBulgarianDate(resData.longDate);
+			console.info(resData);
 			dispatch(
 				placesActions.setBulgarianDateRedux(resData.longDate.toString())
 			);
@@ -135,8 +137,13 @@ const UselessInfo = ({ isFocused }) => {
 				app version:{appVersion} build version:{buildVersion}
 			</Text>
 			<View>
+					{bulgarianDate && (
+						<TouchableOpacity style={styles.button} onPress={onPress}>
+							<Text>днес е {bulgarianDate}-ма година старобългарска календарна система, годишен знак Дванш (Заек)</Text>
+						</TouchableOpacity>
+					)}
 				<Text>
-					AstroData за{' '}
+					цикъл небесни тела за{' '}
 					{!editLocationLabel ? (
 						locationLabel
 					) : (
@@ -148,13 +155,8 @@ const UselessInfo = ({ isFocused }) => {
 						/>
 					)}
 				</Text>
-				<Button title={'^^'} onPress={() => setEditLocationLabel(!editLocationLabel)} />
+				<Button color={Colors.buttonPrimary} title={'^^'} onPress={() => setEditLocationLabel(!editLocationLabel)} />
 			</View>
-			{bulgarianDate && (
-				<TouchableOpacity style={styles.button} onPress={onPress}>
-					<Text>днес е {bulgarianDate}година</Text>
-				</TouchableOpacity>
-			)}
 			{moonInfo && (
 				<>
 					<Text>
@@ -178,6 +180,9 @@ const styles = StyleSheet.create({
 	container: {
 		marginHorizontal: 10,
 	},
+	button: {
+		backgroundColor: Colors.buttonPrimary,
+	}
 });
 
 export default UselessInfo;

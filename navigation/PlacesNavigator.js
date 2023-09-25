@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Platform,StatusBar } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 

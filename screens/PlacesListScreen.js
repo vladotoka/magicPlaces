@@ -1,7 +1,8 @@
-import { FlatList, StyleSheet, View, Platform } from 'react-native';
+import { FlatList, StyleSheet, StatusBar, View, Platform } from 'react-native';
 import React, { useLayoutEffect, useEffect } from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
+import Colors from '../constants/Colors';
 
 import * as placesActions from '../store/places-actions';
 
@@ -37,6 +38,7 @@ const PlacesListScreen = (props) => {
 
 	return (
 		<View style={{ flex: 1 }}>
+			<StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
 			<UselessInfo isFocused={isFocused} />
 			<FlatList
 				data={places}

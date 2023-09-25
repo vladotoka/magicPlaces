@@ -5,6 +5,7 @@ import {
 	View,
 	Button,
 	ScrollView,
+	StatusBar,
 	Image,
 	TouchableWithoutFeedback,
 	Modal,
@@ -65,6 +66,7 @@ const PlaceDetailScreen = (props) => {
 
 	return (
 		<ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+			<StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
 			<View style={styles.centeredView}>
 				<Modal
 					animationType="slide"
@@ -119,7 +121,7 @@ const PlaceDetailScreen = (props) => {
 				</Modal>
 			</View>
 			<View>
-				<Text style={{fontWeight: 'bold'}}>{selectedPlace.title}</Text>
+				<Text style={{ fontWeight: 'bold' }}>{selectedPlace.title}</Text>
 				<Text>{selectedPlace.dateOfCreation}</Text>
 			</View>
 			<Image style={styles.image} source={{ uri: selectedPlace.imageUri }} />
