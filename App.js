@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -49,3 +50,5 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 });
+
+//ⰺ҅ ⱄⰲⱑⱅⱏ ⰲⱏ ⱅⱏⰿⱑ ⱄⰲⱐⱅⰻⱅⱏ ⱄⱔ · ⰺ҅ ⱅⱏⰿⰰ ⰵⰳⱁ ⱀⰵ ⱁⰱⱐⱗⱅⱏ ·

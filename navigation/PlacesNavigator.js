@@ -7,6 +7,19 @@ import MapScreen from '../screens/MapScreen';
 import NewPlaceScreen from '../screens/NewPlaceScreen';
 import PlaceDetailScreen from '../screens/PlaceDetailScreen';
 import PlacesListScreen from '../screens/PlacesListScreen';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
+
+function MagicDrawer() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Магични места" component={MainNavigator} />
+      <Drawer.Screen name="Облик" component={MainNavigator} />
+      <Drawer.Screen name="За магични места" component={MainNavigator} />
+    </Drawer.Navigator>
+  );
+}
 
 const Stack = createStackNavigator();
 
@@ -47,4 +60,4 @@ const MainNavigator = () => {
 	);
 };
 
-export default MainNavigator;
+export default MagicDrawer;
