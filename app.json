@@ -3,7 +3,7 @@
     "name": "magicPlaces",
     "description": "Запазете магичните места, които сте посетили в локална SD памет. Save the magical places you've visited to a local SD memory.",
     "slug": "magicPlaces",
-    "version": "1.2.3.alpha",
+    "version": "1.2.3.beta",
     "githubUrl": "https://github.com/vladotoka/magicPlaces",
     "orientation": "default",
     "icon": "./assets/sacred.png",
@@ -23,7 +23,7 @@
     },
     "android": {
       "package": "com.places.magic",
-      "versionCode": 49,
+      "versionCode": 50,
       "adaptiveIcon": {
         "foregroundImage": "./assets/sacred-adaptive.png",
         "backgroundColor": "#FFFFFF"
